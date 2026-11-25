@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>자인의 소리</title>
+<meta name="description" content="자인중학교 전교생 16명이 자인시장과 계정숲에서 듣고, 시로 쓰고, 노래로 만든 마을 이야기.">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Jua&display=swap">
+<style>
+/* 레이아웃: 휴대폰 한 줄 세로 흐름. 시장 차양 띠 아래로 가게별 노래 묶음이 이어지고, 곡을 누르면 그 곡 한 장이 열린다. */
+:root {
+  --bg: #fdf5e6; --card: #fffbf2; --ink: #3a2314; --muted: #7b6553; --line: #ead8bd;
+  --accent: #c4432d; --forest: #2f6d3e; --on-accent: #fffaf0;
+  --c1: #8a5a33; --c2: #e0705a; --c3: #3f7d4f; --c4: #3d86c6; --c5: #d9512f; --c6: #dc9a2b; --c7: #2f5f96; --c8: #c9352b;
+  --display: "Jua", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --body: "Gowun Dodum", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #1e1713; --card: #2a201a; --ink: #f4e8d6; --muted: #b9a590; --line: #43342a;
+  --accent: #f0806a; --forest: #86c592; --on-accent: #1e1713; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #1e1713; --card: #2a201a; --ink: #f4e8d6; --muted: #b9a590; --line: #43342a;
+  --accent: #f0806a; --forest: #86c592; --on-accent: #1e1713; color-scheme: dark }
+
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.7; word-break: keep-all; }
+.awning { height: 18px; background: repeating-linear-gradient(90deg, var(--c7) 0 40px, var(--card) 40px 80px, var(--c5) 80px 120px, var(--card) 120px 160px, var(--c6) 160px 200px, var(--card) 200px 240px, var(--c3) 240px 280px, var(--card) 280px 320px); }
+.awning::after { content: ""; display: block; height: 20px; transform: translateY(18px); background: inherit;
+  -webkit-mask: radial-gradient(circle at 20px 0, #000 19.5px, #0000 20px) 0 0 / 40px 20px repeat-x;
+          mask: radial-gradient(circle at 20px 0, #000 19.5px, #0000 20px) 0 0 / 40px 20px repeat-x; }
+.wrap { max-width: 640px; margin: 0 auto; padding-block: 40px 32px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; margin: 0; text-wrap: balance; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+
+/* 첫 화면 */
+.mast h1 { font-size: 2.9rem; line-height: 1.15; }
+.mast h1 em { font-style: normal; color: var(--accent); }
+.mast p { margin: 10px 0 0; color: var(--muted); }
+.theme { display: flex; align-items: center; gap: 14px; margin-top: 26px; padding: 16px; border-radius: 18px;
+  background: var(--accent); color: var(--on-accent); text-decoration: none; }
+.theme .t { font-family: var(--display); font-size: 1.25rem; line-height: 1.3; }
+.theme .s { font-size: .88rem; opacity: .9; }
+.theme .txt { min-width: 0; flex: 1; }
+.part { margin-top: 44px; }
+.part > h2 { font-size: 1.7rem; }
+.part > h2 small { display: block; font-family: var(--body); font-size: .9rem; color: var(--muted); margin-top: 2px; }
+.forest > h2 { color: var(--forest); }
+.shop { margin-top: 22px; }
+.shop h3 { display: flex; align-items: center; gap: 8px; font-family: var(--body); font-weight: 700; font-size: .95rem; color: var(--muted); }
+.dot { width: 12px; height: 12px; border-radius: 50%; flex: none; }
+.rows { margin-top: 8px; border-top: 1px solid var(--line); }
+.row { display: flex; align-items: center; gap: 12px; padding: 13px 4px; border-bottom: 1px solid var(--line); text-decoration: none; }
+.row .txt { min-width: 0; flex: 1; }
+.row .t { font-family: var(--display); font-size: 1.2rem; line-height: 1.3; }
+.row .s { font-size: .88rem; color: var(--muted); }
+.row .dur { font-size: .85rem; color: var(--muted); font-variant-numeric: tabular-nums; flex: none; }
+.soon { font-size: .78rem; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 1px 9px; flex: none; }
+.ico { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; flex: none; background: var(--card); border: 1px solid var(--line); color: var(--accent); }
+.theme .ico { background: var(--on-accent); border-color: transparent; }
+.ico svg, .play svg { width: 45%; height: 45%; fill: currentColor; }
+.note { margin-top: 10px; color: var(--muted); }
+.foot .copy { text-align: center; font-size: .78rem; margin-top: 16px; }
+.foot { margin-top: 48px; padding-top: 18px; border-top: 1px solid var(--line); font-size: .85rem; color: var(--muted); }
+
+/* 곡 화면 */
+.back { display: inline-block; font-size: .95rem; color: var(--muted); text-decoration: none; padding: 6px 0; }
+.chip { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; font-size: .92rem; color: var(--muted); }
+.song h1 { font-size: 2.3rem; line-height: 1.2; margin-top: 6px; }
+.by { margin: 6px 0 0; color: var(--muted); }
+.player { margin-top: 22px; padding: 18px; border-radius: 20px; background: var(--card); border: 1px solid var(--line);
+  display: flex; align-items: center; gap: 16px; }
+.play { width: 68px; height: 68px; border-radius: 50%; border: 0; flex: none; cursor: pointer; display: grid; place-items: center;
+  background: var(--accent); color: var(--on-accent); }
+.play:disabled { background: var(--line); color: var(--muted); cursor: default; }
+.seek { min-width: 0; flex: 1; }
+.seek input { width: 100%; accent-color: var(--accent); margin: 0; }
+.time { display: flex; justify-content: space-between; font-size: .82rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.wait { margin: 0; color: var(--muted); }
+.lyrics { margin-top: 26px; }
+.lyrics h2 { font-family: var(--body); font-weight: 700; font-size: .9rem; color: var(--muted); letter-spacing: .04em; }
+.lyrics p { white-space: pre-line; margin: 14px 0 0; font-size: 1.08rem; line-height: 1.85; }
+.nav { display: flex; gap: 10px; margin-top: 34px; }
+.nav a { flex: 1; min-width: 0; padding: 12px 14px; border: 1px solid var(--line); border-radius: 14px; text-decoration: none; background: var(--card); }
+.nav a small { display: block; color: var(--muted); font-size: .8rem; }
+.nav a span { font-family: var(--display); font-size: 1.02rem; }
+.nav a.next { text-align: right; }
+</style>
+</head>
+<body>
+
+<div class="awning" aria-hidden="true"></div>
+<main class="wrap">
+  <section id="home"></section>
+  <section id="song" class="song" hidden></section>
+  <footer class="foot">
+    <p>노랫말은 자인중학교 전교생 16명이 자인시장 상인들을 인터뷰하고 쓴 시입니다. 곡은 AI 작곡 도구(Suno)로 붙였습니다.</p>
+    <p class="copy">© 2026 자인중학교 『자인의 소리』를 만든 사람들</p>
+  </footer>
+</main>
+<audio id="au" preload="none"></audio>
+<script src="songs-data.js"></script>
+<script>
+(function () {
+  var S = window.JAIN_SONGS || [];
+  var home = document.getElementById('home'), view = document.getElementById('song'), au = document.getElementById('au');
+  var PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5v17a1 1 0 0 0 1.5.86l14-8.5a1 1 0 0 0 0-1.72l-14-8.5A1 1 0 0 0 6 3.5z"/></svg>';
+  var PAUSE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h5v18H5zM14 3h5v18h-5z"/></svg>';
+  var current = null, wantPlay = false;
+
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function mmss(t) { t = Math.max(0, Math.floor(t || 0)); return Math.floor(t / 60) + ':' + ('0' + (t % 60)).slice(-2); }
+  function byId(id) { for (var i = 0; i < S.length; i++) if (S[i].id === id) return S[i]; return null; }
+
+  function row(s) {
+    return '<a class="row" href="#' + s.id + '"><span class="ico">' + PLAY + '</span>' +
+      '<span class="txt"><span class="t">' + esc(s.title) + '</span><br><span class="s">' + esc(s.by) + '</span></span>' +
+      (s.src ? '<span class="dur">' + mmss(s.dur) + '</span>' : '<span class="soon">노래 준비 중</span>') + '</a>';
+  }
+
+  function renderHome() {
+    var theme = byId('00'), h = '';
+    h += '<header class="mast"><h1>자인의 <em>소리</em></h1>' +
+      '<p>자인중학교 전교생 16명이 시장과 숲에서 듣고, 시로 쓰고, 노래로 만든 우리 마을 이야기</p></header>';
+    if (theme) h += '<a class="theme" href="#00"><span class="ico">' + PLAY + '</span><span class="txt"><span class="t">' +
+      esc(theme.title) + '</span><br><span class="s">주제가 · ' + mmss(theme.dur) + '</span></span></a>';
+
+    h += '<section class="part"><h2>마을의 소리<small>1부 · 자인시장 여덟 가게 이야기</small></h2>';
+    var shop = null;
+    S.forEach(function (s) {
+      if (s.part !== 'village') return;
+      if (s.shop !== shop) {
+        if (shop !== null) h += '</div></div>';
+        shop = s.shop;
+        h += '<div class="shop"><h3><span class="dot" style="background:var(--' + s.color + ')"></span>' + esc(s.shop) + '</h3><div class="rows">';
+      }
+      h += row(s);
+    });
+    if (shop !== null) h += '</div></div>';
+    h += '</section>';
+
+    h += '<section class="part forest"><h2>숲의 소리<small>2부 · 계정숲</small></h2>';
+    var forest = S.filter(function (s) { return s.part === 'forest'; });
+    h += forest.length ? '<div class="rows">' + forest.map(row).join('') + '</div>'
+      : '<p class="note">계정숲 노래와 숲 안내 소리를 준비하고 있어요.</p>';
+    h += '</section>';
+
+    var tg = S.filter(function (s) { return s.part === 'together'; });
+    if (tg.length) h += '<section class="part"><h2>함께 부르는 노래</h2><div class="rows" style="margin-top:14px">' + tg.map(row).join('') + '</div></section>';
+    home.innerHTML = h;
+  }
+
+  function renderSong(s) {
+    var i = S.indexOf(s), prev = S[i - 1], next = S[i + 1], h = '';
+    h += '<a class="back" href="#home">← 자인의 소리</a><br>';
+    if (s.shop) h += '<span class="chip"><span class="dot" style="background:var(--' + s.color + ')"></span>' + esc(s.shop) + '</span>';
+    h += '<h1>' + esc(s.title) + '</h1><p class="by">' + (s.part === 'village' ? '글 ' : '') + esc(s.by) + '</p>';
+    h += '<div class="player">';
+    if (s.src) {
+      h += '<button class="play" id="playbtn" type="button" aria-label="재생">' + PLAY + '</button>' +
+        '<div class="seek"><input id="seekbar" type="range" min="0" max="' + s.dur + '" step="1" value="0" aria-label="재생 위치">' +
+        '<div class="time"><span id="tcur">0:00</span><span id="tdur">' + mmss(s.dur) + '</span></div></div>';
+    } else {
+      h += '<button class="play" type="button" disabled aria-label="노래 준비 중">' + PLAY + '</button><p class="wait">노래를 만들고 있어요. 먼저 시로 만나 보세요.</p>';
+    }
+    h += '</div>';
+    h += '<div class="lyrics"><h2>' + (s.src ? '노랫말' : '시') + '</h2>' +
+      s.lyrics.split(/\n\n+/).map(function (st) { return '<p>' + esc(st) + '</p>'; }).join('') + '</div>';
+    h += '<nav class="nav">' +
+      (prev ? '<a class="prev" href="#' + prev.id + '"><small>← 앞 곡</small><span>' + esc(prev.title) + '</span></a>' : '<span style="flex:1"></span>') +
+      (next ? '<a class="next" href="#' + next.id + '"><small>다음 곡 →</small><span>' + esc(next.title) + '</span></a>' : '<span style="flex:1"></span>') + '</nav>';
+    view.innerHTML = h;
+
+    var btn = document.getElementById('playbtn'), bar = document.getElementById('seekbar');
+    if (!btn) return;
+    btn.addEventListener('click', function () { if (au.paused) au.play().catch(function () {}); else au.pause(); });
+    bar.addEventListener('input', function () { au.currentTime = +bar.value; });
+  }
+
+  function sync() {
+    var btn = document.getElementById('playbtn'), bar = document.getElementById('seekbar'), cur = document.getElementById('tcur');
+    if (!btn) return;
+    btn.innerHTML = au.paused ? PLAY : PAUSE;
+    btn.setAttribute('aria-label', au.paused ? '재생' : '멈춤');
+    if (document.activeElement !== bar) bar.value = Math.floor(au.currentTime || 0);
+    cur.textContent = mmss(au.currentTime);
+    if (isFinite(au.duration) && au.duration > 0) { bar.max = Math.floor(au.duration); document.getElementById('tdur').textContent = mmss(au.duration); }
+  }
+  ['play', 'pause', 'timeupdate', 'loadedmetadata', 'ended'].forEach(function (e) { au.addEventListener(e, sync); });
+
+  function route() {
+    var s = byId((location.hash || '').replace('#', ''));
+    if (!s) {
+      au.pause(); current = null;
+      view.hidden = true; home.hidden = false; document.title = '자인의 소리';
+      return;
+    }
+    home.hidden = true; view.hidden = false;
+    if (current !== s) {
+      au.pause(); current = s;
+      if (s.src) { au.src = s.src; au.load(); } else { au.removeAttribute('src'); }
+      renderSong(s);
+      window.scrollTo(0, 0);
+      if (s.src && wantPlay) au.play().catch(function () {});
+    }
+    wantPlay = false;
+    document.title = s.title + ' · 자인의 소리';
+  }
+  // 목록에서 곡을 누른 경우(직접 누른 동작)에만 바로 재생한다. QR로 들어오면 재생 단추를 눌러야 소리가 난다.
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a.row, a.theme, .nav a');
+    if (a) wantPlay = true;
+  });
+  window.addEventListener('hashchange', route);
+  renderHome(); route();
+})();
+</script>
+</body>
+</html>
