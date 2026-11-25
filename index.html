@@ -126,7 +126,7 @@ a { color: inherit; }
     if (theme) h += '<a class="theme" href="#00"><span class="ico">' + PLAY + '</span><span class="txt"><span class="t">' +
       esc(theme.title) + '</span><br><span class="s">주제가 · ' + mmss(theme.dur) + '</span></span></a>';
 
-    h += '<section class="part"><h2>마을의 소리<small>1부 · 자인시장 여덟 가게 이야기</small></h2>';
+    h += '<section class="part"><h2>자인시장 소리<small>1부 · 자인시장 여덟 가게 이야기</small></h2>';
     var shop = null;
     S.forEach(function (s) {
       if (s.part !== 'village') return;
@@ -140,7 +140,7 @@ a { color: inherit; }
     if (shop !== null) h += '</div></div>';
     h += '</section>';
 
-    h += '<section class="part forest"><h2>숲의 소리<small>2부 · 계정숲</small></h2>';
+    h += '<section class="part forest"><h2>계정숲 소리<small>2부 · 계정숲에서 쓴 시와 노래</small></h2>';
     var forest = S.filter(function (s) { return s.part === 'forest'; });
     h += forest.length ? '<div class="rows">' + forest.map(row).join('') + '</div>'
       : '<p class="note">계정숲 노래와 숲 안내 소리를 준비하고 있어요.</p>';
@@ -155,7 +155,7 @@ a { color: inherit; }
     var i = S.indexOf(s), prev = S[i - 1], next = S[i + 1], h = '';
     h += '<a class="back" href="#home">← 자인의 소리</a><br>';
     if (s.shop) h += '<span class="chip"><span class="dot" style="background:var(--' + s.color + ')"></span>' + esc(s.shop) + '</span>';
-    h += '<h1>' + esc(s.title) + '</h1><p class="by">' + (s.part === 'village' ? '글 ' : '') + esc(s.by) + '</p>';
+    h += '<h1>' + esc(s.title) + '</h1><p class="by">' + (/학년/.test(s.by) ? '글 ' : '') + esc(s.by) + '</p>';
     h += '<div class="player">';
     if (s.src) {
       h += '<button class="play" id="playbtn" type="button" aria-label="재생">' + PLAY + '</button>' +
